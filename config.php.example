@@ -1,0 +1,3 @@
+<?php
+define('API_ACCESS_KEY', 'Your Firebase API_ACCESS_KEY');
+define('USER_TOKEN_DIR', __DIR__ . '/user_token');

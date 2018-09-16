@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+  <form action="server_push_data.php" id="notification_form" a="notification_form" method="POST">
+    <input type="text" name="title" id="" placeholder="enter the msg title" required><br>
+    <textarea name="content" id="" placeholder="enter the msg content" maxlength="50"></textarea>
+  </form>
+  <button type="button" id="btnPushNotification">推一個通知</button>
+  <div id="ajax_response">
+
+  </div>
+  <!-- Push Notification -->
+  <script>
+      $('#btnPushNotification').click(function () {
+        var _form = $('#notification_form')
+        var data = _form.serialize()
+        console.log(data)
+
+        $.ajax({
+                type: _form.attr('method'),
+                url: _form.attr('action'),
+                // contentType: _form.attr('enctype'),
+                async: true,
+                cache: false,
+                dataType: 'json',
+                data: data,
+                success: function (res) {
+                    console.log(res)
+                    $('#ajax_response').append($('<div/>', {
+                      html: String(res) + '<hr>'
+                    }));
+                },
+                error: function (e) {
+                    console.log(e)
+                }
+            });
+      });
+  </script>
+</body>
+</html>
